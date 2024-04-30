@@ -13,13 +13,14 @@ function init() {
     // レンダラーを作成
     const canvas = document.querySelector("#myCanvas");
     if (!canvas) {
-    throw new Error("Canvas element with ID 'myCanvas' not found.");
+        throw new Error("Canvas element with ID 'myCanvas' not found.");
     }
 
     const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    antialias: true,
+        canvas: canvas,
+        antialias: true,
     });
+    
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
 
@@ -46,30 +47,30 @@ function init() {
     const geometry = new THREE.SphereGeometry(25, 32, 32);
     const material = new THREE.MeshStandardMaterial();
 
-for (let i = 0; i < 2000; i++) {
-    const mesh = new THREE.Mesh(geometry, material);
-    mesh.position.x = (Math.random() - 0.5) * 2000;
-    mesh.position.y = (Math.random() - 0.5) * 2000;
-    mesh.position.z = (Math.random() - 0.5) * 2000;
-    mesh.rotation.x = Math.random() * 2 * Math.PI;
-    mesh.rotation.y = Math.random() * 2 * Math.PI;
-    mesh.rotation.z = Math.random() * 2 * Math.PI;
-      // グループに格納する
-    group.add(mesh);
-}
+    for (let i = 0; i < 2000; i++) {
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.x = (Math.random() - 0.5) * 2000;
+        mesh.position.y = (Math.random() - 0.5) * 2000;
+        mesh.position.z = (Math.random() - 0.5) * 2000;
+        mesh.rotation.x = Math.random() * 2 * Math.PI;
+        mesh.rotation.y = Math.random() * 2 * Math.PI;
+        mesh.rotation.z = Math.random() * 2 * Math.PI;
+        // グループに格納する
+        group.add(mesh);
+    }
 
         // 光源
-scene.add(new THREE.DirectionalLight(0x3377ff, 2)); // 平行光源
-scene.add(new THREE.AmbientLight(0x0055ff)); // 環境光源
+    scene.add(new THREE.DirectionalLight(0x3377ff, 2)); // 平行光源
+    scene.add(new THREE.AmbientLight(0x0055ff)); // 環境光源
 
-    // 毎フレーム時に実行されるループイベントです
-tick();
+        // 毎フレーム時に実行されるループイベントです
+    tick();
 
-function tick() {
-      // グループを回す
-    group.rotateY(0.01);
-    renderer.render(scene, camera); // レンダリング
-    requestAnimationFrame(tick);
+    function tick() {
+        // グループを回す
+        group.rotateY(0.01);
+        renderer.render(scene, camera); // レンダリング
+        requestAnimationFrame(tick);
     }
 }
 

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お気に入りボタン</title>
+  <!-- Vue.js の CDN リンクを追加 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <style>
+    /* お気に入りボタンのスタイル */
+    .favorite {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <!-- Vue.js を使用したお気に入りボタンの実装 -->
+  <div id="app">
+    <div v-for="article in articles" :key="article.id">
+      <!-- 記事タイトル -->
+      <div>{{ article.title }}</div>
+      <!-- お気に入りボタン -->
+      <button @click="toggleFavorite(article.id)" :class="{ favorite: isFavorite(article.id) }">
+        お気に入り
+      </button>
+    </div>
+
+    <!-- お気に入り一覧 -->
+    <div>
+      <h2>お気に入り一覧</h2>
+      <ul>
+        <li v-for="article in favoriteArticles" :key="article.id">{{ article.title }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Vue インスタンスの作成
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          // ダミーの記事データ
+          articles: [
+            { id: 1, title: '記事1' },
+            { id: 2, title: '記事2' },
+            { id: 3, title: '記事3' },
+            { id: 4, title: '記事4' },
+            { id: 5, title: '記事5' },
+            // 他の記事データ
+          ],
+          favorites: JSON.parse(localStorage.getItem('favorites')) || [],
+        };
+      },
+      methods: {
+        // お気に入りボタンのクリック時の処理
+        toggleFavorite(articleId) {
+          if (this.isFavorite(articleId)) {
+            // お気に入りから削除
+            const index = this.favorites.indexOf(articleId);
+            this.favorites.splice(index, 1);
+          } else {
+            // お気に入りに追加
+            this.favorites.push(articleId);
+          }
+          // ローカルストレージに保存
+          localStorage.setItem('favorites', JSON.stringify(this.favorites));
+        },
+        // 記事がお気に入りかどうかを判定するメソッド
+        isFavorite(articleId) {
+          return this.favorites.includes(articleId);
+        },
+      },
+      computed: {
+        // お気に入りの記事の一覧を取得する計算プロパティ
+        favoriteArticles() {
+          return this.articles.filter(article => this.isFavorite(article.id));
+        }
+      }
+    });
+  </script>
+</body>
+</html>
