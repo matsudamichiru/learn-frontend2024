@@ -6,30 +6,34 @@
   <title>お気に入りボタン</title>
   <!-- Vue.js の CDN リンクを追加 -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-  <style>
-    /* お気に入りボタンのスタイル */
-    .favorite {
-      color: red;
-    }
-  </style>
+  <script type="module" src="./main.ts"></script>
+
 </head>
 <body>
   <!-- Vue.js を使用したお気に入りボタンの実装 -->
-  <div id="app">
-    <div v-for="article in articles" :key="article.id">
+  <div id="app" class="wrapper">
+    <h2>記事一覧</h2>
+    <p>★ボタンを押下するとページ下部のお気に入り一覧に追加される。</p>
+    <div v-for="article in articles" :key="article.id" class="article__list">
       <!-- 記事タイトル -->
-      <div>{{ article.title }}</div>
       <!-- お気に入りボタン -->
       <button @click="toggleFavorite(article.id)" :class="{ favorite: isFavorite(article.id) }">
-        お気に入り
+        ★
       </button>
+      <div>
+        <p>{{ article.title }}</p>
+        <p>{{ article.content }}</p>
+      </div>
     </div>
 
     <!-- お気に入り一覧 -->
-    <div>
+    <div class="favorite__list">
       <h2>お気に入り一覧</h2>
       <ul>
-        <li v-for="article in favoriteArticles" :key="article.id">{{ article.title }}</li>
+        <li v-for="article in favoriteArticles" :key="article.id">
+          <p>{{ article.title }}</p>
+          <p>{{ article.content }}</p>
+        </li>
       </ul>
     </div>
   </div>
@@ -42,11 +46,11 @@
         return {
           // ダミーの記事データ
           articles: [
-            { id: 1, title: '記事1' },
-            { id: 2, title: '記事2' },
-            { id: 3, title: '記事3' },
-            { id: 4, title: '記事4' },
-            { id: 5, title: '記事5' },
+            { id: 1, title: '記事1タイトル', content:'テキストテキストテキストテキストテキストテキストテキストテキスト' },
+            { id: 2, title: '記事2タイトル', content:'テキストテキストテキストテキストテキストテキストテキストテキスト' },
+            { id: 3, title: '記事3タイトル', content:'テキストテキストテキストテキストテキストテキストテキストテキスト' },
+            { id: 4, title: '記事4タイトル', content:'テキストテキストテキストテキストテキストテキストテキストテキスト' },
+            { id: 5, title: '記事5タイトル', content:'テキストテキストテキストテキストテキストテキストテキストテキスト' },
             // 他の記事データ
           ],
           favorites: JSON.parse(localStorage.getItem('favorites')) || [],
