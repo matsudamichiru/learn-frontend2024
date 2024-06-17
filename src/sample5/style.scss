@@ -9,6 +9,7 @@ body {
   height: 100vh;
   background: url(../../public/assets/sample5/bg.png) no-repeat 100%/100%;
   position: relative;
+  overflow: hidden;
 
   &::before {
     content: '';
