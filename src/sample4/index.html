@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>チケットの値段</h1>
+  <input type="number" id="age" placeholder="Enter your age">
+  <button onclick="calculatePrice()">Get Price</button>
+  <p id="price"></p>
+
+  <script>
+    function calculatePrice() {
+      const age = document.getElementById('age').value;
+      let price;
+
+      if (age <= 5) {
+        price = "free";
+      } else if (age >= 6 && age <= 12) {
+        price = "500yen";
+      } else if (age >= 13 && age <= 64) {
+        price = "1000yen";
+      } else if (age >= 65) {
+        price = "700yen";
+      }
+      document.getElementById('price').textContent = `Price: ${price}`;
+    }
+  </script>
+</body>
+</html>

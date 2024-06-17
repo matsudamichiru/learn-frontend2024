@@ -62,7 +62,7 @@
           if (this.isFavorite(articleId)) {
             // お気に入りから削除
             const index = this.favorites.indexOf(articleId);
-            this.favorites.splice(index, 1);
+            this.favorites[index].classList.add('is-active');
           } else {
             // お気に入りに追加
             this.favorites.push(articleId);

@@ -1,0 +1,39 @@
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.bg {
+  width: 100vw;
+  height: 100vh;
+  background: url(../../public/assets/sample5/bg.png) no-repeat 100%/100%;
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    background-image: url(../../public/assets/sample5/object1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100vw;
+    height: 100vh;
+    mix-blend-mode: screen;
+      filter: brightness(1.2) contrast(0.8); 
+  }
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    background-image: url(../../public/assets/sample5/object2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100vw;
+    height: 100vh;
+    mix-blend-mode: screen;
+      filter: brightness(1.2) contrast(0.8); 
+  }
+}
